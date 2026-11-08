@@ -1,0 +1,19 @@
+services:
+  backend:
+    build: ./backend
+    environment:
+      FILEMASTER_MAX_UPLOAD_MB: ${FILEMASTER_MAX_UPLOAD_MB:-200}
+      FILEMASTER_FILE_TTL_MINUTES: ${FILEMASTER_FILE_TTL_MINUTES:-60}
+      FILEMASTER_FFMPEG_TIMEOUT_S: ${FILEMASTER_FFMPEG_TIMEOUT_S:-900}
+      FILEMASTER_MAX_WORKERS: ${FILEMASTER_MAX_WORKERS:-2}
+      FILEMASTER_CORS_ORIGINS: ${FILEMASTER_CORS_ORIGINS:-http://localhost:8080}
+    tmpfs:
+      - /var/lib/filemaster:size=4g,uid=10001
+    restart: unless-stopped
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    restart: unless-stopped

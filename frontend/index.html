@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>FileMaster</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script>
+      // Apply theme, language and direction before first paint (no flash of the wrong theme).
+      (function () {
+        try {
+          var theme = localStorage.getItem('fm-theme');
+          if (theme !== 'light' && theme !== 'dark') {
+            theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          }
+          var lang = localStorage.getItem('fm-lang');
+          if (lang !== 'fr' && lang !== 'en' && lang !== 'ar') lang = 'fr';
+          var d = document.documentElement;
+          d.setAttribute('data-theme', theme);
+          d.lang = lang;
+          d.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

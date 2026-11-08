@@ -1,0 +1,22 @@
+# secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+# dependencies / build output
+node_modules/
+frontend/dist/
+frontend/playwright-report/
+frontend/test-results/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.coverage
+# runtime data (never commit user files)
+tmp/
+filemaster_data/
+*.zip
+.DS_Store
